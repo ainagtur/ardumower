@@ -1275,6 +1275,9 @@ void Robot::loop()  {
         if (rollDir == RIGHT) motorRightSpeedRpmSet = ((double)motorLeftSpeedRpmSet) * ratio;
           else motorLeftSpeedRpmSet = ((double)motorRightSpeedRpmSet) * ratio;                            
       }             
+	  if (stateTime > motorSpiralStartTime) {
+		 motorLeftSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(stateTime-motorSpiralStartTime)));
+	  }
       checkErrorCounter();    
       checkTimer();
       checkRain();
