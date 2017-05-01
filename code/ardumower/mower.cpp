@@ -55,6 +55,8 @@ Mower::Mower(){
   motorRollTimeMin           = 750;       // min. roll time (ms) should be smaller than motorRollTimeMax
   motorReverseTime           = 1200;      // max. reverse time (ms)
   motorForwTimeMax           = 80000;     // max. forward time (ms) / timeout
+  motorSpiralStartTime       = 6000;     // forward time before spiral start(ms)	
+  motorSpiralFactor          = 30000;    // factor for spiral width
   motorBiDirSpeedRatio1      = 0.3;       // bidir mow pattern speed ratio 1
   motorBiDirSpeedRatio2      = 0.92;      // bidir mow pattern speed ratio 2
   
