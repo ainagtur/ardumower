@@ -83,6 +83,7 @@ Robot::Robot(){
   motorRightRpmCurr = motorLeftRpmCurr = 0;
   lastMotorRpmTime = 0;
   lastSetMotorSpeedTime = 0;
+  lastSetSpiralStartTime = 0;
   motorLeftSpeedRpmSet =  motorRightSpeedRpmSet = 0; 
   motorLeftPWMCurr = motorRightPWMCurr = 0;
   motorRightSenseADC = motorLeftSenseADC = 0;
@@ -646,7 +647,11 @@ void Robot::checkCurrent(){
        Console.println("Error: Motor Right current");
     }
   }
-
+  
+  if ((motorMowSense >= motorMowPowerThreshold) && (lastSetSpiralStartTime < stateStartTime + motorSpiralStartTimeMin)){
+      lastSetSpiralStartTime = millis();
+  }
+    
   if (motorMowSense >= motorMowPowerMax){
       motorMowSenseCounter++;
   }
@@ -1273,8 +1278,8 @@ void Robot::loop()  {
         if (rollDir == RIGHT) motorRightSpeedRpmSet = ((double)motorLeftSpeedRpmSet) * ratio;
           else motorLeftSpeedRpmSet = ((double)motorRightSpeedRpmSet) * ratio;                            
       }             
-	  if (stateTime > motorSpiralStartTime) {
-		 motorLeftSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(stateTime-motorSpiralStartTime)));
+	  if (lastSetSpiralStartTime >= stateStartTime + motorSpiralStartTimeMin) {
+		 motorLeftSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime)));
 	  }
       checkErrorCounter();    
       checkTimer();

@@ -55,7 +55,7 @@ Mower::Mower(){
   motorRollTimeMin           = 750;       // min. roll time (ms) should be smaller than motorRollTimeMax
   motorReverseTime           = 1200;      // max. reverse time (ms)
   motorForwTimeMax           = 80000;     // max. forward time (ms) / timeout
-  motorSpiralStartTime       = 6000;     // forward time before spiral start(ms)	
+  motorSpiralStartTimeMin       = 6000;     // minimal forward time before spiral start(ms)	
   motorSpiralFactor          = 30000;    // factor for spiral width
   motorBiDirSpeedRatio1      = 0.3;       // bidir mow pattern speed ratio 1
   motorBiDirSpeedRatio2      = 0.92;      // bidir mow pattern speed ratio 2
@@ -79,6 +79,7 @@ Mower::Mower(){
   motorMowAccel              = 2000;       // motor mower acceleration (warning: do not set too low) 2000 seems to fit best considerating start time and power consumption 
   motorMowSpeedMaxPwm        = 255;        // motor mower max PWM
   motorMowPowerMax           = 75.0;       // motor mower max power (Watt)
+  motorMowPowerThreshold     = 15.0;       // motor mower power (Watt) threshold to detect unmown areas
   motorMowModulate           = 0;          // motor mower cutter modulation?
   motorMowRPMSet             = 3300;       // motor mower RPM (only for cutter modulation)
   motorMowSenseScale         = ADC2voltage(1)*1905;    // ADC to mower motor sense milliamp 
@@ -255,7 +256,7 @@ ISR(PCINT0_vect){
     const byte actPins = PINK;                				// read register PINK
     const byte setPins = (oldOdoPins ^ actPins);
     if (setPins & 0b00010000)                 				// pin left has changed 
-    {
+    { 
       if (robot.motorLeftPWMCurr >= 0)						// forward
         robot.odometryLeft++;
       else
