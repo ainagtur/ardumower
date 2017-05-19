@@ -651,10 +651,12 @@ void Robot::checkCurrent(){
   if ((motorMowSense >= motorMowPowerThreshold) && (lastSetSpiralStartTime < stateStartTime + motorSpiralStartTimeMin)){
       lastSetSpiralStartTime = millis();
   }
-    
+    if (motorMowSense >= motorMowPowerMax/2){
+	  setMotorPWM( 0, 0, false );
+  }    
   if (motorMowSense >= motorMowPowerMax){
       motorMowSenseCounter++;
-  }
+  }  
   else{ 
       errorCounterMax[ERR_MOW_SENSE] = 0;
       motorMowSenseCounter = 0;
