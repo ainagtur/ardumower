@@ -147,6 +147,7 @@ void Robot::loadSaveUserSettings(boolean readflag){
   eereadwriteString(readflag, addr, esp8266ConfigString);
   eereadwrite(readflag, addr, tiltUse);
   eereadwrite(readflag, addr, sonarSlowBelow);
+  eereadwrite(readflag, addr, motorSpiralStartTimeMin);
   eereadwrite(readflag, addr, motorSpiralFactor);
   eereadwrite(readflag, addr, motorMowPowerThreshold);
   Console.print(F("loadSaveUserSettings addrstop="));
