@@ -146,6 +146,10 @@ void Robot::loadSaveUserSettings(boolean readflag){
   eereadwrite(readflag, addr, esp8266Use);
   eereadwriteString(readflag, addr, esp8266ConfigString);
   eereadwrite(readflag, addr, tiltUse);
+  eereadwrite(readflag, addr, sonarSlowBelow);
+  eereadwrite(readflag, addr, motorSpiralStartTimeMin);
+  eereadwrite(readflag, addr, motorSpiralFactor);
+  eereadwrite(readflag, addr, motorMowPowerThreshold);
   Console.print(F("loadSaveUserSettings addrstop="));
   Console.println(addr);
 }
@@ -186,6 +190,11 @@ void Robot::printSettingSerial(){
   Console.print  (F("motorForwTimeMax                           : "));
   Console.println(motorForwTimeMax);
   
+    Console.print  (F("motorSpiralStartTimeMin                  : "));
+  Console.println(motorSpiralStartTimeMin );
+    Console.print  (F("motorSpiralFactor                        : "));
+  Console.println(motorSpiralFactor );
+
   Console.print  (F("motorBiDirSpeedRatio1                      : "));
   Console.println(motorBiDirSpeedRatio1);
   
@@ -212,6 +221,8 @@ void Robot::printSettingSerial(){
   Console.println(motorMowSpeedMaxPwm);
   Console.print  (F("motorMowPowerMax                           : "));
   Console.println(motorMowPowerMax);
+  Console.print  (F("motorMowPowerThreshold                     : "));
+  Console.println(motorMowPowerThreshold);
   Console.print  (F("motorMowModulate                           : "));
   Console.println(motorMowModulate,1);
   Console.print  (F("motorMowRPMSet                             : "));  
