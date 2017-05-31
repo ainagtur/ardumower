@@ -772,6 +772,7 @@ void Robot::checkPerimeterBoundary(){
     if (stateCurr == STATE_FORWARD) {
       if (perimeterTriggerTime != 0) {
         if (millis() >= perimeterTriggerTime){        
+          setMotorPWM( 0, 0, false );
           perimeterTriggerTime = 0;
           //if ((rand() % 2) == 0){  
           if(rotateLeft){  
@@ -789,9 +790,9 @@ void Robot::checkPerimeterBoundary(){
           setMotorPWM( 0, 0, false );
           //if ((rand() % 2) == 0){
           if (rotateLeft){    
-          setNextState(STATE_PERI_OUT_FORW, LEFT);
+          setNextState(STATE_PERI_OUT_REV, LEFT);
           } else {
-          setNextState(STATE_PERI_OUT_FORW, RIGHT);
+          setNextState(STATE_PERI_OUT_REV, RIGHT);
           }  
         }
       }
