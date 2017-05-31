@@ -719,7 +719,17 @@ void Robot::checkCurrent(){
 void Robot::checkBumpers(){
   if ((mowPatternCurr == MOW_BIDIR) && (millis() < stateStartTime + 4000)) return;
 
+    if (stateCurr <> STATE_FORWARD) {
   if ((bumperLeft || bumperRight)) {    
+      if (bumperLeft) {
+        setNextState(STATE_FORWARD, RIGHT);          
+      } else {
+        setNextState(STATE_FORWARD, LEFT);          
+      }    
+
+	
+	}	
+  else if ((bumperLeft || bumperRight)) {    
       if (bumperLeft) {
         reverseOrBidir(RIGHT);          
       } else {
