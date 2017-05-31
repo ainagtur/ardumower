@@ -1062,6 +1062,7 @@ void Robot::setNextState(byte stateNew, byte dir){
     stateEndTime = millis() + perimeterOutRevTime + motorZeroSettleTime + 1000;   
   }
   else if (stateNew == STATE_PERI_OUT_REV){
+	motorMowEnable = false;
     motorLeftSpeedRpmSet = motorRightSpeedRpmSet = -motorSpeedMaxRpm/1.25;                    
     stateEndTime = millis() + perimeterOutRevTime + motorZeroSettleTime; 
   }
