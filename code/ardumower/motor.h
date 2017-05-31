@@ -337,7 +337,7 @@ void Robot::checkOdometryFaults(){
     Console.print("\tRPM=");
     Console.println(motorLeftRpmCurr);
     addErrorCounter(ERR_ODOMETRY_LEFT);
-    setNextState(STATE_ERROR, 0);
+//    setNextState(STATE_ERROR, 0);
   }
   if (rightErr){
     Console.print("Right odometry error: PWM=");
@@ -345,7 +345,7 @@ void Robot::checkOdometryFaults(){
     Console.print("\tRPM=");
     Console.println(motorRightRpmCurr);
     addErrorCounter(ERR_ODOMETRY_RIGHT);
-    setNextState(STATE_ERROR, 0);
+//    setNextState(STATE_ERROR, 0);
   }
 }
 
