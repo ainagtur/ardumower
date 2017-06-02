@@ -720,7 +720,7 @@ void Robot::checkBumpers(){
   if ((mowPatternCurr == MOW_BIDIR) && (millis() < stateStartTime + 4000)) return;
 
     if (stateCurr != STATE_FORWARD) {
-		if ((bumperLeft || bumperRight)) {    
+		if ((bumperLeft || bumperRight) && millis() > stateStartTime + 2000) {    
 			if (bumperLeft) {
 				setNextState(STATE_FORWARD, RIGHT);          
 			} 
@@ -731,7 +731,7 @@ void Robot::checkBumpers(){
 	
     	}
 	}	
-	else if ((bumperLeft || bumperRight)) {    
+	else if ((bumperLeft || bumperRight) && millis() > stateStartTime + 2000) {    
       if (bumperLeft) {
         reverseOrBidir(RIGHT);          
       } else {
