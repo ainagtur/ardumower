@@ -559,8 +559,8 @@ void Robot::checkErrorCounter(){
   }  
   if (stateCurr != STATE_OFF) {
    for (int i=0; i < ERR_ENUM_COUNT; i++){
-     // set to fatal error if any temporary error counter reaches 10
-     if (errorCounter[i] > 10) {       
+     // set to fatal error if any temporary error counter reaches 100
+     if (errorCounter[i] > 100) {       
        setNextState(STATE_ERROR, 0);
      }
     }
