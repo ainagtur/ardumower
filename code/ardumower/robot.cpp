@@ -1407,7 +1407,7 @@ void Robot::loop()  {
      // if (millis() >= stateEndTime) setNextState(STATE_PERI_OUT_ROLL, rollDir);   
 //      if (perimeterInside || (millis() >= stateEndTime)) setNextState (STATE_PERI_OUT_ROLL, rollDir); 
       if (millis() >= stateEndTime) {
-		  if perimeterInside setNextState (STATE_PERI_OUT_ROLL, rollDir); 
+		  if (perimeterInside) setNextState (STATE_PERI_OUT_ROLL, rollDir); 
 		  else setNextState (STATE_OFF, rollDir);		  
 	  }  
       break;
