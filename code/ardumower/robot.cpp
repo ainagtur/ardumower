@@ -986,7 +986,7 @@ void Robot::processGPSData()
 }
 
 void Robot::checkTimeout(){
-  if (stateTime > motorForwTimeMax){ 
+  if (stateTime > motorForwTimeMax*5 || (stateTime > motorForwTimeMax && motorLeftSpeedRpmSet == motorRightSpeedRpmSet)){ 
     // timeout 
     motorMowSenseErrorCounter = 0;
     if (rollDir == RIGHT) setNextState(STATE_REVERSE, LEFT); // toggle roll dir
