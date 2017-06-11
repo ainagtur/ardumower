@@ -693,7 +693,7 @@ void Robot::checkCurrent(){
     } else if ((stateCurr == STATE_ROLL) && (millis() > stateStartTime + motorPowerIgnoreTime)){
       motorLeftSenseCounter++;
       setMotorPWM( 0, 0, false );  
-      setNextState(STATE_FORWARD, 0);
+      setNextState(STATE_FORWARD, rollDir);
     }    
   }
   else if (motorRightSense >= motorPowerMax){       
@@ -710,7 +710,7 @@ void Robot::checkCurrent(){
      } else if ((stateCurr == STATE_ROLL) && (millis() > stateStartTime + motorPowerIgnoreTime)){
        motorRightSenseCounter++;
        setMotorPWM( 0, 0, false );  
-       setNextState(STATE_FORWARD, 0);
+       setNextState(STATE_FORWARD, rollDir);
     }
   }
 }  
@@ -1003,7 +1003,7 @@ void Robot::processGPSData()
 }
 
 void Robot::checkTimeout(){
-  if (stateTime > motorForwTimeMax){ 
+  if (stateTime > motorForwTimeMax*5 || (stateTime > motorForwTimeMax && motorLeftSpeedRpmSet == motorRightSpeedRpmSet)){ 
     // timeout 
     motorMowSenseErrorCounter = 0;
     if (rollDir == RIGHT) setNextState(STATE_REVERSE, LEFT); // toggle roll dir
@@ -1299,7 +1299,12 @@ void Robot::loop()  {
           else motorLeftSpeedRpmSet = ((double)motorRightSpeedRpmSet) * ratio;                            
       }             
 	  if (lastSetSpiralStartTime >= stateStartTime + motorSpiralStartTimeMin) {
+		  if (rollDir == RIGHT){
+		 motorRightSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime)));
+		  }
+		  else{
 		 motorLeftSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime)));
+		  }
 	  }
       checkErrorCounter();    
       checkTimer();
@@ -1324,7 +1329,7 @@ void Robot::loop()  {
         if (abs(distancePI(imu.ypr.yaw, imuRollHeading)) < PI/36) setNextState(STATE_FORWARD,0);				        
       } else {
         if (millis() >= stateEndTime) {
-          setNextState(STATE_FORWARD,0);				          
+			setNextState(STATE_FORWARD, rollDir); 	          
         }        
       }
       break;
@@ -1426,7 +1431,7 @@ void Robot::loop()  {
 	  }  
       break;
     case STATE_PERI_OUT_ROLL: 
-      if (millis() >= stateEndTime) setNextState(STATE_FORWARD,0);                
+      if (millis() >= stateEndTime) setNextState(STATE_FORWARD,rollDir);                
       break;
 
     case STATE_STATION_CHECK:
