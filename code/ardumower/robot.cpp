@@ -721,6 +721,7 @@ void Robot::checkBumpers(){
 
     if (stateCurr != STATE_FORWARD) {
 		if ((bumperLeft || bumperRight) && millis() > stateStartTime + 2000) {    
+			setMotorPWM( 0, 0, false );  
 			if (bumperLeft) {
 				setNextState(STATE_FORWARD, RIGHT);          
 			} 
@@ -732,6 +733,7 @@ void Robot::checkBumpers(){
     	}
 	}	
 	else if ((bumperLeft || bumperRight) && millis() > stateStartTime + 2000) {    
+      setMotorPWM( 0, 0, false );  
       if (bumperLeft) {
         reverseOrBidir(RIGHT);          
       } else {
