@@ -775,6 +775,7 @@ void Robot::checkPerimeterBoundary(){
         setMotorPWM( 0, 0, false );
         if (millis() >= perimeterTriggerTime+120){        
           perimeterTriggerTime = 0;
+		  motorMowEnable = false;
           //if ((rand() % 2) == 0){  
           if(rotateLeft){  
           setNextState(STATE_PERI_OUT_REV, LEFT);
@@ -789,6 +790,7 @@ void Robot::checkPerimeterBoundary(){
         setMotorPWM( 0, 0, false );
         if (millis() >= perimeterTriggerTime + 120){ 
           perimeterTriggerTime = 0;
+		  motorMowEnable = false;
           //if ((rand() % 2) == 0){
           if (rotateLeft){    
           setNextState(STATE_PERI_OUT_REV, LEFT);
@@ -1068,7 +1070,8 @@ void Robot::setNextState(byte stateNew, byte dir){
     stateEndTime = millis() + perimeterOutRevTime + motorZeroSettleTime; 
   }
   else if (stateNew == STATE_PERI_OUT_ROLL){
-  
+  	motorMowEnable = false;
+
   
   
   	//Ehl
