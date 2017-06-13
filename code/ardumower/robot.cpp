@@ -395,13 +395,14 @@ void Robot::readSensors(){
     }    
     if (perimeterInside < 0) setActuator(ACT_LED, HIGH);                     
       else setActuator(ACT_LED, LOW);    
-    if ((!perimeterInside) && (perimeterTriggerTime == 0)){
+	  if (perimeterInside) perimeterTriggerTime = 0;
+	  else if ((!perimeterInside) && (perimeterTriggerTime == 0)){
       // set perimeter trigger time      
-      if (millis() > stateStartTime + 2000){ // far away from perimeter?
-        perimeterTriggerTime = millis() + perimeterTriggerTimeout;  
-      } else {  
+//      if (millis() > stateStartTime + 2000){ // far away from perimeter?
+//        perimeterTriggerTime = millis() + perimeterTriggerTimeout;  
+//      } else {  
         perimeterTriggerTime = millis();
-      }
+//      }
     }
     if (perimeter.signalTimedOut(0))  {      
       if ( (stateCurr != STATE_OFF) && (stateCurr != STATE_MANUAL) && (stateCurr != STATE_STATION) 
@@ -785,9 +786,10 @@ void Robot::checkPerimeterBoundary(){
   } else {  
     if (stateCurr == STATE_FORWARD) {
       if (perimeterTriggerTime != 0) {
-        if (millis() >= perimeterTriggerTime){        
-          setMotorPWM( 0, 0, false );
+        setMotorPWM( 0, 0, false );
+        if (millis() >= perimeterTriggerTime+120){        
           perimeterTriggerTime = 0;
+		  motorMowEnable = false;
           //if ((rand() % 2) == 0){  
           if(rotateLeft){  
           setNextState(STATE_PERI_OUT_REV, LEFT);
@@ -799,9 +801,10 @@ void Robot::checkPerimeterBoundary(){
     } 
     else if ((stateCurr == STATE_ROLL)) {
       if (perimeterTriggerTime != 0) {
-        if (millis() >= perimeterTriggerTime){ 
+        setMotorPWM( 0, 0, false );
+        if (millis() >= perimeterTriggerTime + 120){ 
           perimeterTriggerTime = 0;
-          setMotorPWM( 0, 0, false );
+		  motorMowEnable = false;
           //if ((rand() % 2) == 0){
           if (rotateLeft){    
           setNextState(STATE_PERI_OUT_REV, LEFT);
@@ -1081,7 +1084,8 @@ void Robot::setNextState(byte stateNew, byte dir){
     stateEndTime = millis() + perimeterOutRevTime + motorZeroSettleTime; 
   }
   else if (stateNew == STATE_PERI_OUT_ROLL){
-  
+  	motorMowEnable = false;
+
   
   
   	//Ehl
