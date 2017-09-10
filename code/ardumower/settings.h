@@ -150,6 +150,7 @@ void Robot::loadSaveUserSettings(boolean readflag){
   eereadwrite(readflag, addr, motorSpiralStartTimeMin);
   eereadwrite(readflag, addr, motorSpiralFactor);
   eereadwrite(readflag, addr, motorMowPowerThreshold);
+  eereadwrite(readflag, addr, motorSpiralStartTimeSecond);
   Console.print(F("loadSaveUserSettings addrstop="));
   Console.println(addr);
 }
@@ -192,6 +193,8 @@ void Robot::printSettingSerial(){
   
     Console.print  (F("motorSpiralStartTimeMin                  : "));
   Console.println(motorSpiralStartTimeMin );
+    Console.print  (F("motorSpiralStartTimeSecond               : "));
+  Console.println(motorSpiralStartTimeSecond );
     Console.print  (F("motorSpiralFactor                        : "));
   Console.println(motorSpiralFactor );
 

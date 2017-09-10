@@ -1280,12 +1280,22 @@ void Robot::loop()  {
         if (rollDir == RIGHT) motorRightSpeedRpmSet = ((double)motorLeftSpeedRpmSet) * ratio;
           else motorLeftSpeedRpmSet = ((double)motorRightSpeedRpmSet) * ratio;                            
       }             
-	  if (lastSetSpiralStartTime >= stateStartTime + motorSpiralStartTimeMin) {
-		  if (rollDir == RIGHT){
-		 motorRightSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime)));
-		  }
-		  else{
-		 motorLeftSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime)));
+	  if ((lastSetSpiralStartTime >= stateStartTime + motorSpiralStartTimeMin) {
+			if (millis() >= lastSetSpiralStartTime + motorSpiralStartTimeSecond)) {
+			  if (rollDir == RIGHT){
+			 motorRightSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime-motorSpiralStartTimeSecond)));
+			  }
+			  else{
+			 motorLeftSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime-motorSpiralStartTimeSecond)));
+			  }
+			}
+		  else {
+			  if (rollDir == RIGHT){
+			 motorRightSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime)));
+			  }
+			  else{
+			 motorLeftSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime)));
+			  }
 		  }
 	  }
       checkErrorCounter();    

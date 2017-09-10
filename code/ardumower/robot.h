@@ -269,6 +269,7 @@ class Robot
     int motorReverseTime ;  // max. reverse time (ms)
     long motorForwTimeMax; // max. forward time (ms) / timeout
     long motorSpiralStartTimeMin; // minimal forward time before spiral start(ms)	
+    long motorSpiralStartTimeSecond; // time between start of the first small spiral to mow the center area of the second spiral 	
     long motorSpiralFactor; // factor for spiral width	
     float motorBiDirSpeedRatio1 ;   // bidir mow pattern speed ratio 1
     float motorBiDirSpeedRatio2 ;   // bidir mow pattern speed ratio 2

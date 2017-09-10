@@ -305,6 +305,7 @@ void RemoteControl::sendMotorMenu(boolean update){
   sendSlider("a08", F("Reverse time"), robot->motorReverseTime, "", 1, 8000);     
   sendSlider("a09", F("Forw time max"), robot->motorForwTimeMax, "", 10, 80000);       
   sendSlider("a22", F("motorSpiralStartTimeMin"), robot->motorSpiralStartTimeMin, "", 10, 80000);       
+  sendSlider("a22", F("motorSpiralStartTimeSecond"), robot->motorSpiralStartTimeSecond, "", 10, 80000);       
   sendSlider("a23", F("motorSpiralFactor"), robot->motorSpiralFactor, "", 10, 100000);       
   sendSlider("a12", F("Bidir speed ratio 1"), robot->motorBiDirSpeedRatio1, "", 0.01, 1.0);       
   sendSlider("a13", F("Bidir speed ratio 2"), robot->motorBiDirSpeedRatio2, "", 0.01, 1.0);       
