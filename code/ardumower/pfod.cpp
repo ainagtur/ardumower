@@ -376,6 +376,7 @@ void RemoteControl::processMotorMenu(String pfodCmd){
     else if (pfodCmd.startsWith("a08")) processSlider(pfodCmd, robot->motorReverseTime, 1);
     else if (pfodCmd.startsWith("a09")) processSlider(pfodCmd, robot->motorForwTimeMax, 10);
     else if (pfodCmd.startsWith("a22")) processSlider(pfodCmd, robot->motorSpiralStartTimeMin, 10);
+    else if (pfodCmd.startsWith("a24")) processSlider(pfodCmd, robot->motorSpiralStartTimeSecond, 10);
     else if (pfodCmd.startsWith("a23")) processSlider(pfodCmd, robot->motorSpiralFactor, 10);
     else if (pfodCmd.startsWith("a11")) processSlider(pfodCmd, robot->motorAccel, 1);    
     else if (pfodCmd.startsWith("a12")) processSlider(pfodCmd, robot->motorBiDirSpeedRatio1, 0.01);    
