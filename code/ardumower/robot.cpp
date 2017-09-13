@@ -1280,8 +1280,8 @@ void Robot::loop()  {
         if (rollDir == RIGHT) motorRightSpeedRpmSet = ((double)motorLeftSpeedRpmSet) * ratio;
           else motorLeftSpeedRpmSet = ((double)motorRightSpeedRpmSet) * ratio;                            
       }             
-	  if ((lastSetSpiralStartTime >= stateStartTime + motorSpiralStartTimeMin) {
-			if (millis() >= lastSetSpiralStartTime + motorSpiralStartTimeSecond)) {
+	  if (lastSetSpiralStartTime >= stateStartTime + motorSpiralStartTimeMin) {
+			if (millis() >= lastSetSpiralStartTime + motorSpiralStartTimeSecond) {
 			  if (rollDir == RIGHT){
 			 motorRightSpeedRpmSet = motorSpeedMaxRpm*(1.0/(1.0+(float)motorSpiralFactor/(float)(millis()-lastSetSpiralStartTime-motorSpiralStartTimeSecond)));
 			  }
